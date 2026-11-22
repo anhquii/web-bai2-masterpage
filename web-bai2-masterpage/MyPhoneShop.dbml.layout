@@ -1,0 +1,50 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ordesignerObjectsDiagram dslVersion="1.0.0.0" absoluteBounds="0, 0, 11, 8.5" name="MyPhoneShop">
+  <DataContextMoniker Name="/MyPhoneShopDataContext" />
+  <nestedChildShapes>
+    <classShape Id="063a0ec1-8b21-4dab-9af5-e2c1bb4d2313" absoluteBounds="0.75, 2.75, 2, 1.1939925130208335">
+      <DataClassMoniker Name="/MyPhoneShopDataContext/Brand" />
+      <nestedChildShapes>
+        <elementListCompartment Id="a9ba6f60-09ff-4c0a-9ae1-78e5e705cfa0" absoluteBounds="0.765, 3.21, 1.9700000000000002, 0.63399251302083326" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="b25d5016-e64a-4b36-8409-96f5f9fbcdc1" absoluteBounds="0.75, 0.75, 2, 1.1939925130208335">
+      <DataClassMoniker Name="/MyPhoneShopDataContext/Category" />
+      <nestedChildShapes>
+        <elementListCompartment Id="f496890c-c2ab-4c22-b85a-04a9eda56b90" absoluteBounds="0.765, 1.21, 1.9700000000000002, 0.63399251302083326" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="d829b6e2-faf9-41a5-88c6-0a386b526280" absoluteBounds="0.75, 6.125, 2, 1.7708968098958326">
+      <DataClassMoniker Name="/MyPhoneShopDataContext/Menu" />
+      <nestedChildShapes>
+        <elementListCompartment Id="d648b13c-8851-4097-95f7-c17d7e54699e" absoluteBounds="0.765, 6.585, 1.9700000000000002, 1.2108968098958333" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="7e276e02-308d-4857-bf56-d3bcbebec177" absoluteBounds="3.5, 2.25, 2, 2.155499674479167">
+      <DataClassMoniker Name="/MyPhoneShopDataContext/Product" />
+      <nestedChildShapes>
+        <elementListCompartment Id="1c02b695-1b91-4aaf-b902-9f00ee8c8da2" absoluteBounds="3.515, 2.71, 1.9700000000000002, 1.5954996744791665" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="064690ef-fbc9-4702-ab5e-d01c22cd5416" absoluteBounds="3.75, 6.125, 2, 1.7708968098958326">
+      <DataClassMoniker Name="/MyPhoneShopDataContext/User" />
+      <nestedChildShapes>
+        <elementListCompartment Id="460a1790-8b73-4c9c-bad7-7e247fc47036" absoluteBounds="3.765, 6.585, 1.9700000000000002, 1.2108968098958333" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <associationConnector edgePoints="[(2.75 : 3.34699625651042); (3.5 : 3.34699625651042)]" fixedFrom="NotFixed" fixedTo="NotFixed">
+      <AssociationMoniker Name="/MyPhoneShopDataContext/Brand/Brand_Product" />
+      <nodes>
+        <classShapeMoniker Id="063a0ec1-8b21-4dab-9af5-e2c1bb4d2313" />
+        <classShapeMoniker Id="7e276e02-308d-4857-bf56-d3bcbebec177" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(2.75 : 1.34699625651042); (4.5 : 1.34699625651042); (4.5 : 2.25)]" fixedFrom="NotFixed" fixedTo="NotFixed">
+      <AssociationMoniker Name="/MyPhoneShopDataContext/Category/Category_Product" />
+      <nodes>
+        <classShapeMoniker Id="b25d5016-e64a-4b36-8409-96f5f9fbcdc1" />
+        <classShapeMoniker Id="7e276e02-308d-4857-bf56-d3bcbebec177" />
+      </nodes>
+    </associationConnector>
+  </nestedChildShapes>
+</ordesignerObjectsDiagram>

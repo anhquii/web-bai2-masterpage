@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KẾ HOẠCH NÂNG CẤP VÀ HOÀN THIỆN DỰ ÁN WEB BÁN HÀNG</title>
+    <style>
+        :root {
+            --primary: #d70018;
+            --primary-dark: #b30013;
+            --secondary: #0071e3;
+            --dark: #1e293b;
+            --gray-bg: #f8fafc;
+            --border: #e2e8f0;
+            --success: #16a34a;
+        }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            background-color: var(--gray-bg);
+            color: var(--dark);
+            line-height: 1.6;
+            margin: 0;
+            padding: 30px 15px;
+        }
+        .container {
+            max-width: 960px;
+            margin: 0 auto;
+            background: #ffffff;
+            padding: 40px;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
+            border: 1px solid var(--border);
+        }
+        h1 {
+            color: var(--primary);
+            font-size: 26px;
+            border-bottom: 3px solid var(--primary);
+            padding-bottom: 12px;
+            margin-top: 0;
+            text-transform: uppercase;
+        }
+        h2 {
+            color: var(--dark);
+            font-size: 19px;
+            border-left: 5px solid var(--primary);
+            padding-left: 12px;
+            margin-top: 35px;
+            margin-bottom: 15px;
+        }
+        h3 {
+            color: #334155;
+            font-size: 16px;
+            margin-top: 20px;
+        }
+        p, li {
+            font-size: 14.5px;
+            color: #334155;
+        }
+        .meta-box {
+            background: #f1f5f9;
+            padding: 15px 20px;
+            border-radius: 8px;
+            font-size: 14px;
+            margin-bottom: 25px;
+            border-left: 4px solid var(--secondary);
+        }
+        .meta-box p {
+            margin: 4px 0;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            font-size: 14px;
+        }
+        th, td {
+            border: 1px solid var(--border);
+            padding: 12px 14px;
+            text-align: left;
+            vertical-align: top;
+        }
+        th {
+            background-color: #f8fafc;
+            color: #0f172a;
+            font-weight: 600;
+        }
+        tr:nth-child(even) {
+            background-color: #fdfdfd;
+        }
+        code {
+            background-color: #f1f5f9;
+            color: #e11d48;
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-size: 13px;
+            font-family: Consolas, monospace;
+        }
+        .badge {
+            display: inline-block;
+            padding: 3px 8px;
+            border-radius: 4px;
+            font-size: 12px;
+            font-weight: 600;
+        }
+        .badge-danger { background-color: #fee2e2; color: #991b1b; }
+        .badge-success { background-color: #dcfce7; color: #166534; }
+        .badge-info { background-color: #e0f2fe; color: #075985; }
+        .phase-card {
+            background: #ffffff;
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 18px;
+            border-top: 4px solid var(--primary);
+        }
+        .phase-title {
+            font-weight: bold;
+            font-size: 16px;
+            color: var(--primary);
+            margin-bottom: 10px;
+        }
+        ul {
+            padding-left: 22px;
+            margin: 8px 0;
+        }
+        li {
+            margin-bottom: 6px;
+        }
+        @media print {
+            body { background: white; padding: 0; }
+            .container { box-shadow: none; border: none; padding: 0; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>KẾ HOẠCH NÂNG CẤP VÀ HOÀN THIỆN DỰ ÁN</h1>
+        
+        <div class="meta-box">
+            <p><strong>Học phần:</strong> Lập trình Web (ASP.NET Web Forms + SQL Server)</p>
+            <p><strong>Dự án:</strong> MyPhoneShop (Chapter 2.3 Master Page 3 cột & LINQ to SQL)</p>
+            <p><strong>Ngày lập:</strong> 17/10/2026 | <strong>Trạng thái:</strong> Đã chốt nghiệp vụ & Đã chạy CSDL</p>
+        </div>
+
+        <h2>I. TỔNG QUAN & BỐI CẢNH TÁI CẤU TRÚC</h2>
+        <h3>1. Vấn đề phát hiện (Lỗ hổng nghiệp vụ & Frontend)</h3>
+        <ul>
+            <li><strong>Sự trùng lặp (Redundancy):</strong> Menu ngang đã chứa các hãng (iPhone, Samsung, Xiaomi...), trong khi Cột trái cũng có một khối liệt kê hãng y hệt (Apple, Samsung, Xiaomi), gây thừa thãi và mất cân đối giao diện.</li>
+            <li><strong>Xung đột bộ lọc (Filter Conflict):</strong> Cột trái sử dụng các liên kết tĩnh độc lập (<code>?brand=1</code> và <code>?price=under5</code>). Khi người dùng chọn Hãng rồi bấm tiếp chọn Giá thì mất luôn Hãng đã chọn, không thể lọc kết hợp đa tiêu chí.</li>
+        </ul>
+
+        <h3>2. Định hướng giải pháp (Phương án 1 đã thống nhất)</h3>
+        <ul>
+            <li><strong>Menu Ngang (Top Navigation):</strong> Đảm nhận 100% việc <strong>Định vị & Chọn mặt hàng / Thương hiệu</strong> (Menu Cha: <em>Điện Thoại, Laptop, Bàn Phím</em>; Menu Con: <em>các hãng tương ứng</em>).</li>
+            <li><strong>Cột Trái (Sidebar):</strong> <strong>Gỡ bỏ khối danh mục hãng bị lặp</strong>, chuyển thành <strong>Bộ lọc Mức giá thông minh (Faceted Filter)</strong> có khả năng cộng dồn tham số trên URL (<code>cat</code>, <code>brand</code>, <code>price</code>) và làm sáng đèn (<code>active</code>) mức giá đang chọn.</li>
+            <li><strong>Cơ sở dữ liệu:</strong> Chuẩn hóa bảng <code>dbo.Menus</code> còn đúng <strong>5 cột cốt lõi</strong>, loại bỏ các cột nghiệp vụ mở rộng không dùng đến (<code>Pos</code>, <code>UserAdd</code>, <code>UserTest</code>, <code>Hide</code>).</li>
+        </ul>
+
+        <h2>II. MA TRẬN 6 LUỒNG NGHIỆP VỤ NGƯỜI DÙNG</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th style="width: 50px;">STT</th>
+                    <th style="width: 170px;">Luồng nghiệp vụ</th>
+                    <th>Thao tác người dùng</th>
+                    <th>URL sinh ra</th>
+                    <th>Phản hồi Giao diện (UI State)</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><strong>1</strong></td>
+                    <td><strong>Trang chủ (Mặc định)</strong></td>
+                    <td>Vào web hoặc bấm nút <em>Trang Chủ</em></td>
+                    <td><code>Default.aspx</code></td>
+                    <td>Nút <em>Trang Chủ</em> Active; Cột trái: <em>Tất cả mức giá</em> Active; Tiêu đề: "TẤT CẢ SẢN PHẨM"</td>
+                </tr>
+                <tr>
+                    <td><strong>2</strong></td>
+                    <td><strong>Chọn Menu Cha</strong></td>
+                    <td>Bấm <em>Điện Thoại</em> hoặc <em>Laptop</em></td>
+                    <td><code>Default.aspx?cat=phone</code></td>
+                    <td>Menu Cha sáng đèn; Cột trái giữ <em>Tất cả mức giá</em>; Tiêu đề: "DANH MỤC: ĐIỆN THOẠI"</td>
+                </tr>
+                <tr>
+                    <td><strong>3</strong></td>
+                    <td><strong>Chọn Menu Con</strong></td>
+                    <td>Rê chuột vào <em>Điện Thoại</em> &rarr; chọn <em>iPhone</em></td>
+                    <td><code>Default.aspx?cat=phone&brand=1</code></td>
+                    <td>Menu cha & con sáng; Tiêu đề: "ĐIỆN THOẠI - IPHONE"; Cột trái giữ <em>Tất cả mức giá</em></td>
+                </tr>
+                <tr>
+                    <td><strong>4</strong></td>
+                    <td><strong>Lọc giá từ Trang chủ</strong></td>
+                    <td>Ở Trang chủ, bấm thẳng <em>Dưới 5 Triệu</em></td>
+                    <td><code>Default.aspx?price=under5</code></td>
+                    <td>Nút <em>Dưới 5 Triệu</em> Active; Lọc toàn shop &lt; 5tr; Tiêu đề: "SẢN PHẨM CÓ GIÁ: DƯỚI 5 TRIỆU"</td>
+                </tr>
+                <tr>
+                    <td><strong>5</strong></td>
+                    <td><strong>Lọc kết hợp Hãng + Giá</strong></td>
+                    <td>Đang xem iPhone &rarr; Bấm tiếp <em>Từ 10 - 20 Triệu</em></td>
+                    <td><code>Default.aspx?cat=phone&brand=1&price=10to20</code></td>
+                    <td>Nút <em>10 - 20 Triệu</em> Active; Chỉ hiện iPhone từ 10 - 20tr; Tiêu đề: "IPHONE - GIÁ TỪ 10 ĐẾN 20 TRIỆU"</td>
+                </tr>
+                <tr>
+                    <td><strong>6</strong></td>
+                    <td><strong>Khôi phục / Bỏ lọc</strong></td>
+                    <td>Bấm <em>Tất Cả Mức Giá</em> ở Cột trái</td>
+                    <td><code>Default.aspx?cat=phone&brand=1</code></td>
+                    <td>Nút <em>Tất Cả Mức Giá</em> Active; Khôi phục toàn bộ giá của hãng đang xem</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <h2>III. CƠ SỞ DỮ LIỆU ĐÃ ĐỒNG BỘ TRÊN SQL SERVER</h2>
+        <div class="phase-card">
+            <div class="phase-title">1. Bảng dbo.Brand (8 Hãng toàn hệ thống)</div>
+            <p>1: Apple (iPhone, MacBook) | 2: Samsung | 3: Xiaomi | 4: Dell | 5: Asus | 6: Logitech | 7: Razer | 8: Ducky</p>
+        </div>
+        <div class="phase-card">
+            <div class="phase-title">2. Bảng dbo.Menus (Chuẩn 5 cột tối giản)</div>
+            <p><code>[ID_MN]</code> (Khóa chính), <code>[Parent]</code> (0: Cha, &gt;0: Con), <code>[Lable]</code> (Tên chữ), <code>[UrlLink]</code> (URL chuyển trang), <code>[OrderKey]</code> (Thứ tự)</p>
+        </div>
+
+        <h2>IV. KẾ HOẠCH TRIỂN KHAI 4 GIAI ĐOẠN</h2>
+
+        <div class="phase-card">
+            <div class="phase-title">GIAI ĐOẠN 1: Dọn dẹp & Nâng cấp Master Page (user.Master)</div>
+            <ul>
+                <li><strong>Gỡ bỏ khối Danh mục hãng ở Cột trái:</strong> Xóa thẻ <code>side-box</code> chứa <code>rptMenuBrands</code> trong <code>user.Master</code>, xóa hàm <code>LoadMenuBrands()</code> trong <code>user.Master.cs</code>.</li>
+                <li><strong>Nâng cấp Bộ lọc giá:</strong> Thêm lựa chọn <em>"✦ Tất Cả Mức Giá"</em>. Viết hàm <code>GetPriceFilterUrl()</code> giữ nguyên <code>cat</code> và <code>brand</code> hiện có khi bấm lọc giá. Tự động gắn class <code>active</code> cho mức giá đang chọn.</li>
+            </ul>
+        </div>
+
+        <div class="phase-card">
+            <div class="phase-title">GIAI ĐOẠN 2: Bổ sung Sản phẩm Mẫu cho Laptop & Bàn Phím</div>
+            <ul>
+                <li>Viết script T-SQL nạp dữ liệu sản phẩm mới vào <code>dbo.Products</code>:
+                    <ul>
+                        <li><strong>Dell (BrandId = 4):</strong> Dell XPS 13, Dell Inspiron 15...</li>
+                        <li><strong>Asus (BrandId = 5):</strong> Asus ROG Strix G16, Asus Zenbook 14...</li>
+                        <li><strong>Logitech (BrandId = 6):</strong> Bàn phím Logitech K120, Logitech MX Keys...</li>
+                        <li><strong>Razer (BrandId = 7):</strong> Bàn phím cơ Razer BlackWidow V4...</li>
+                        <li><strong>Ducky (BrandId = 8):</strong> Bàn phím cơ Ducky One 3 RGB...</li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+
+        <div class="phase-card">
+            <div class="phase-title">GIAI ĐOẠN 3: Hiện thực hóa Trang Sản phẩm (Default.aspx & Default.aspx.cs)</div>
+            <ul>
+                <li><strong>Giao diện Default.aspx:</strong> Hiển thị Breadcrumb / Tiêu đề phản hồi ngữ cảnh lọc; Lưới hiển thị danh sách sản phẩm bằng <code>&lt;asp:Repeater&gt;</code>; Khung thông báo khi không tìm thấy hàng kèm nút <em>"Xóa bộ lọc"</em>.</li>
+                <li><strong>Code-behind Default.aspx.cs (LINQ to SQL):</strong> Đọc tham số <code>cat</code>, <code>brand</code>, <code>price</code> từ QueryString, thực hiện câu truy vấn LINQ lọc kết hợp đa điều kiện.</li>
+            </ul>
+        </div>
+
+        <div class="phase-card">
+            <div class="phase-title">GIAI ĐOẠN 4: Biên dịch MSBuild & Kiểm thử Toàn diện</div>
+            <ul>
+                <li>Biên dịch toàn bộ Solution bằng MSBuild (Cam kết 0 Errors, 0 Warnings).</li>
+                <li>Kiểm thử trực quan toàn bộ 6 luồng nghiệp vụ trên trình duyệt.</li>
+            </ul>
+        </div>
+    </div>
+</body>
+</html>

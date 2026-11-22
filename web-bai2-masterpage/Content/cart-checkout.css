@@ -1,0 +1,1824 @@
+﻿/* ==========================================================================
+   MODULE 6: Content/cart-checkout.css
+   VAI TRÒ: Giỏ Hàng Shopee (Cart.aspx), Thanh Toán Độc Lập 2 Cột (Checkout.aspx),
+            Cổng VietQR Napas247 & Nút Mua Hàng Chuẩn Thương Mại Điện Tử
+   ========================================================================== */
+
+/* =========================================================================
+   PHASE 3: SHOPEE-STYLE SHOPPING CART, PRODUCT PURCHASE & VIETQR CHECKOUT
+   ========================================================================= */
+
+/* 1. Nút Giỏ hàng trên Header (user.Master) */
+.header-cart-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background: rgba(255, 255, 255, 0.16);
+    border: 1px solid rgba(255, 255, 255, 0.45);
+    color: #ffffff !important;
+    text-decoration: none !important;
+    padding: 7px 12px;
+    border-radius: 8px;
+    font-size: 13px;
+    font-weight: 600;
+    transition: all 0.2s ease;
+    position: relative;
+}
+
+.header-cart-btn:hover {
+    background: rgba(255, 255, 255, 0.28);
+    transform: translateY(-1px);
+}
+
+.cart-icon {
+    font-size: 16px;
+    line-height: 1;
+}
+
+.cart-count-badge {
+    background: #ffd400;
+    color: #b91c1c;
+    font-weight: 800;
+    font-size: 12px;
+    min-width: 22px;
+    height: 22px;
+    padding: 0 6px;
+    border-radius: 999px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+}
+
+/* 2. Cụm chọn số lượng & 2 nút Mua hàng kiểu Shopee trên ProductDetail.aspx */
+.detail-desc-box {
+    font-size: 14px;
+    color: #475569;
+    line-height: 1.7;
+    margin-bottom: 18px;
+}
+
+.shopee-purchase-section {
+    background: #f8fafc;
+    border: 1px solid #e2e8f0;
+    border-radius: 10px;
+    padding: 16px;
+    margin-top: 10px;
+}
+
+.quantity-picker-row {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    flex-wrap: wrap;
+    margin-bottom: 16px;
+}
+
+.qty-label {
+    font-size: 14px;
+    font-weight: 600;
+    color: #334155;
+}
+
+.qty-control-group {
+    display: inline-flex;
+    align-items: center;
+    border: 1px solid #cbd5e1;
+    border-radius: 6px;
+    background: #ffffff;
+    overflow: hidden;
+}
+
+.qty-step-btn {
+    width: 34px;
+    height: 34px;
+    border: none;
+    background: #f1f5f9;
+    color: #1e293b;
+    font-size: 18px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: background 0.15s;
+}
+
+.qty-step-btn:hover {
+    background: #e2e8f0;
+}
+
+.qty-input-box {
+    width: 52px;
+    height: 34px;
+    border: none;
+    border-left: 1px solid #cbd5e1;
+    border-right: 1px solid #cbd5e1;
+    text-align: center;
+    font-size: 14px;
+    font-weight: 700;
+    color: #0f172a;
+    outline: none;
+}
+
+.stock-status-badge {
+    font-size: 12px;
+    color: #15803d;
+    font-weight: 600;
+    background: #dcfce7;
+    padding: 4px 10px;
+    border-radius: 999px;
+}
+
+.shopee-action-buttons {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+}
+
+.btn-shopee-add-cart {
+    flex: 1;
+    min-width: 190px;
+    padding: 12px 18px;
+    font-size: 14px;
+    font-weight: 700;
+    color: #d70018;
+    background: #fff5f5;
+    border: 1.5px solid #d70018;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.btn-shopee-add-cart:hover {
+    background: #fee2e2;
+}
+
+.btn-shopee-buy-now {
+    flex: 1;
+    min-width: 170px;
+    padding: 12px 20px;
+    font-size: 14px;
+    font-weight: 700;
+    color: #ffffff !important;
+    background: linear-gradient(135deg, #ee4d2d 0%, #d70018 100%);
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    text-align: center;
+    transition: all 0.2s ease;
+    box-shadow: 0 4px 12px rgba(215, 0, 24, 0.25);
+}
+
+.btn-shopee-buy-now:hover {
+    opacity: 0.94;
+    transform: translateY(-1px);
+}
+
+.cart-toast-success {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 9999;
+    background: rgba(15, 23, 42, 0.92);
+    color: #ffffff;
+    padding: 22px 28px;
+    border-radius: 12px;
+    font-size: 14px;
+    font-weight: 600;
+    text-align: center;
+    box-shadow: 0 12px 32px rgba(0, 0, 0, 0.35);
+    pointer-events: none;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    min-width: 260px;
+    max-width: 360px;
+    animation: shopeeToastFade 2.4s ease forwards;
+}
+
+.cart-toast-success::before {
+    content: "\2714";
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    background: #10b981;
+    color: #ffffff;
+    font-size: 22px;
+    font-weight: 800;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 10px rgba(16, 185, 129, 0.4);
+}
+
+@keyframes shopeeToastFade {
+    0% {
+        opacity: 0;
+        transform: translate(-50%, -45%) scale(0.92);
+    }
+    12% {
+        opacity: 1;
+        transform: translate(-50%, -50%) scale(1);
+    }
+    80% {
+        opacity: 1;
+        transform: translate(-50%, -50%) scale(1);
+    }
+    100% {
+        opacity: 0;
+        transform: translate(-50%, -55%) scale(0.95);
+        visibility: hidden;
+    }
+}
+
+/* 3. Trang Giỏ hàng (Cart.aspx) */
+.cart-page-wrapper,
+.checkout-page-wrapper {
+    background: #ffffff;
+    border-radius: 12px;
+    padding: 18px;
+    box-shadow: 0 2px 10px rgba(15, 23, 42, 0.06);
+}
+
+.section-header-bar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 10px;
+    padding-bottom: 12px;
+    margin-bottom: 16px;
+    border-bottom: 2px solid #f1f5f9;
+}
+
+.section-heading {
+    margin: 0;
+    font-size: 18px;
+    font-weight: 800;
+    color: #b91c1c;
+}
+
+.link-continue-shopping {
+    font-size: 13px;
+    font-weight: 600;
+    color: #2563eb;
+    text-decoration: none;
+}
+
+.link-continue-shopping:hover {
+    text-decoration: underline;
+}
+
+.empty-cart-box {
+    text-align: center;
+    padding: 40px 20px;
+    color: #475569;
+}
+
+.empty-cart-icon {
+    font-size: 48px;
+    margin-bottom: 10px;
+}
+
+.cart-table-container {
+    overflow-x: auto;
+}
+
+.cart-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 13px;
+}
+
+.cart-table th {
+    background: #f8fafc;
+    color: #334155;
+    font-weight: 700;
+    padding: 10px 8px;
+    border-bottom: 2px solid #e2e8f0;
+    text-align: left;
+}
+
+.cart-table td {
+    padding: 12px 8px;
+    border-bottom: 1px solid #f1f5f9;
+    vertical-align: middle;
+}
+
+.cart-product-cell {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.cart-item-thumb {
+    width: 56px;
+    height: 56px;
+    object-fit: contain;
+    border: 1px solid #e2e8f0;
+    border-radius: 6px;
+    padding: 2px;
+    background: #ffffff;
+}
+
+.cart-product-meta {
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+}
+
+.cart-product-title {
+    font-weight: 700;
+    color: #1e293b;
+    text-decoration: none;
+}
+
+.cart-product-title:hover {
+    color: #d70018;
+}
+
+.cart-product-code {
+    font-size: 11px;
+    color: #64748b;
+}
+
+.cart-price-cell {
+    text-align: right;
+    font-weight: 600;
+    color: #334155;
+}
+
+.cart-subtotal-cell {
+    text-align: right;
+    font-weight: 800;
+    color: #d70018;
+}
+
+.cart-qty-inline {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+}
+
+.qty-mini-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 26px;
+    height: 26px;
+    background: #f1f5f9;
+    border: 1px solid #cbd5e1;
+    border-radius: 4px;
+    color: #0f172a;
+    text-decoration: none;
+    font-weight: 700;
+}
+
+.qty-mini-input {
+    width: 40px;
+    height: 26px;
+    text-align: center;
+    border: 1px solid #cbd5e1;
+    border-radius: 4px;
+    font-weight: 700;
+}
+
+.btn-update-qty-link {
+    font-size: 11px;
+    color: #2563eb;
+    text-decoration: none;
+    font-weight: 600;
+    margin-left: 2px;
+}
+
+.btn-remove-cart-item {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 26px;
+    height: 26px;
+    border-radius: 50%;
+    background: #fee2e2;
+    color: #b91c1c;
+    text-decoration: none;
+    font-weight: 700;
+}
+
+.cart-summary-footer {
+    margin-top: 18px;
+    padding-top: 16px;
+    border-top: 2px dashed #e2e8f0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 14px;
+}
+
+.btn-clear-cart {
+    color: #dc2626;
+    font-size: 13px;
+    font-weight: 600;
+    text-decoration: none;
+}
+
+.cart-footer-right {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    flex-wrap: wrap;
+}
+
+.cart-grand-total {
+    font-size: 20px;
+    color: #d70018;
+    margin-left: 6px;
+}
+
+.btn-proceed-checkout {
+    text-decoration: none !important;
+    padding: 11px 22px;
+}
+
+/* 4. Trang Thanh toán & VietQR (Checkout.aspx) */
+.checkout-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.checkout-card {
+    background: #f8fafc;
+    border: 1px solid #e2e8f0;
+    border-radius: 10px;
+    padding: 16px;
+}
+
+.checkout-card-title {
+    margin: 0 0 14px 0;
+    font-size: 15px;
+    font-weight: 800;
+    color: #0f172a;
+    border-bottom: 1px solid #e2e8f0;
+    padding-bottom: 8px;
+}
+
+.form-group-item {
+    margin-bottom: 12px;
+}
+
+.form-label {
+    display: block;
+    font-size: 13px;
+    font-weight: 600;
+    color: #334155;
+    margin-bottom: 5px;
+}
+
+.required-star {
+    color: #dc2626;
+}
+
+.form-control-input {
+    width: 100%;
+    padding: 9px 12px;
+    border: 1px solid #cbd5e1;
+    border-radius: 6px;
+    font-size: 13px;
+    box-sizing: border-box;
+}
+
+.payment-method-radio-list label {
+    display: inline-block;
+    font-size: 13px;
+    font-weight: 600;
+    color: #1e293b;
+    margin: 6px 0 6px 6px;
+    cursor: pointer;
+}
+
+.vietqr-preview-box {
+    margin-top: 14px;
+    background: #ffffff;
+    border: 2px solid #0284c7;
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.vietqr-header-badge {
+    background: linear-gradient(90deg, #0369a1, #0284c7);
+    color: #ffffff;
+    font-size: 12px;
+    font-weight: 800;
+    padding: 8px 12px;
+    text-align: center;
+    letter-spacing: 0.4px;
+}
+
+.vietqr-body-grid {
+    display: flex;
+    gap: 14px;
+    padding: 14px;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.vietqr-img-col {
+    flex-shrink: 0;
+    text-align: center;
+    margin: 0 auto;
+}
+
+.vietqr-code-image {
+    width: 195px;
+    max-width: 100%;
+    border: 1px solid #e2e8f0;
+    border-radius: 8px;
+    padding: 4px;
+    background: #ffffff;
+}
+
+.vietqr-info-col {
+    flex: 1;
+    min-width: 210px;
+    font-size: 13px;
+}
+
+.qr-info-row {
+    display: flex;
+    justify-content: space-between;
+    padding: 5px 0;
+    border-bottom: 1px dashed #e2e8f0;
+}
+
+.qr-highlight-code {
+    color: #0369a1;
+    font-family: Consolas, monospace;
+    font-size: 14px;
+}
+
+.qr-highlight-amount {
+    color: #d70018;
+    font-size: 15px;
+}
+
+.qr-note-text {
+    margin: 8px 0 0 0;
+    font-size: 12px;
+    color: #475569;
+    font-style: italic;
+}
+
+.checkout-item-row {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 8px 0;
+    border-bottom: 1px solid #e2e8f0;
+    font-size: 13px;
+}
+
+.checkout-item-thumb {
+    width: 44px;
+    height: 44px;
+    object-fit: contain;
+    background: #ffffff;
+    border: 1px solid #e2e8f0;
+    border-radius: 6px;
+}
+
+.checkout-item-info {
+    flex: 1;
+}
+
+.checkout-item-name {
+    font-weight: 700;
+    color: #1e293b;
+}
+
+.checkout-item-qty {
+    font-size: 12px;
+    color: #64748b;
+}
+
+.checkout-item-subtotal {
+    font-weight: 700;
+    color: #d70018;
+}
+
+.checkout-totals-box {
+    margin-top: 12px;
+    padding-top: 8px;
+}
+
+.summary-line {
+    display: flex;
+    justify-content: space-between;
+    padding: 5px 0;
+    font-size: 13px;
+    color: #334155;
+}
+
+.summary-grand-total {
+    border-top: 2px solid #cbd5e1;
+    margin-top: 6px;
+    padding-top: 10px;
+    font-size: 15px;
+}
+
+.final-total-price {
+    color: #d70018;
+    font-size: 18px;
+}
+
+.btn-place-order-full {
+    width: 100%;
+    margin-top: 14px;
+    font-size: 15px;
+    padding: 13px;
+}
+
+.checkout-error-alert {
+    display: block;
+    background: #fef2f2;
+    border: 1px solid #ef4444;
+    color: #b91c1c;
+    padding: 10px 14px;
+    border-radius: 8px;
+    font-size: 13px;
+    font-weight: 600;
+    margin-bottom: 14px;
+}
+
+.order-success-card {
+    text-align: center;
+    padding: 28px 18px;
+    background: #f0fdf4;
+    border: 1.5px solid #22c55e;
+    border-radius: 12px;
+}
+
+.success-check-badge {
+    width: 54px;
+    height: 54px;
+    border-radius: 50%;
+    background: #16a34a;
+    color: #ffffff;
+    font-size: 28px;
+    font-weight: 800;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 10px;
+}
+
+.success-heading {
+    margin: 0 0 8px 0;
+    color: #15803d;
+    font-size: 22px;
+}
+
+.success-order-meta {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    flex-wrap: wrap;
+    margin: 14px 0;
+    font-size: 14px;
+}
+
+.order-id-pill {
+    background: #dcfce7;
+    color: #166534;
+    padding: 3px 10px;
+    border-radius: 999px;
+}
+
+.success-instruction-box {
+    background: #ffffff;
+    border: 1px dashed #16a34a;
+    border-radius: 8px;
+    padding: 12px;
+    max-width: 560px;
+    margin: 12px auto;
+    font-size: 13px;
+    color: #1e293b;
+    line-height: 1.6;
+}
+
+.success-qr-container {
+    margin-top: 14px;
+}
+
+
+/* =========================================================================
+   5. STANDALONE SHOPEE-STYLE CHECKOUT LAYOUT (60% - 40% TWO-COLUMN)
+   ========================================================================= */
+
+.checkout-standalone-body {
+    margin: 0;
+    padding: 0;
+    background-color: #f5f5f5;
+    font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+    color: #1e293b;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+.checkout-container {
+    width: 100%;
+    max-width: 1180px;
+    margin: 0 auto;
+    padding: 0 16px;
+    box-sizing: border-box;
+}
+
+/* Header trắng viền đỏ kiểu "Shopee | Thanh Toán" */
+.checkout-top-header {
+    background: #ffffff;
+    border-bottom: 1px solid #e2e8f0;
+    box-shadow: 0 2px 8px rgba(15, 23, 42, 0.04);
+    padding: 16px 0;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+}
+
+.checkout-header-inner {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 12px;
+}
+
+.checkout-brand-group {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+}
+
+.checkout-brand-logo {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    text-decoration: none;
+}
+
+.checkout-logo-icon {
+    width: 34px;
+    height: 34px;
+    border-radius: 8px;
+    background: #d70018;
+    color: #ffffff;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 18px;
+    font-weight: 800;
+}
+
+.checkout-logo-text {
+    font-size: 22px;
+    font-weight: 800;
+    color: #d70018;
+    letter-spacing: -0.3px;
+}
+
+.checkout-logo-text span {
+    color: #0f172a;
+}
+
+.checkout-header-divider {
+    width: 1.5px;
+    height: 26px;
+    background: #d70018;
+    opacity: 0.45;
+}
+
+.checkout-page-title {
+    margin: 0;
+    font-size: 20px;
+    font-weight: 600;
+    color: #d70018;
+}
+
+.checkout-header-right {
+    display: flex;
+    align-items: center;
+    gap: 18px;
+}
+
+.checkout-secure-badge {
+    font-size: 13px;
+    color: #15803d;
+    background: #dcfce7;
+    padding: 5px 12px;
+    border-radius: 999px;
+    font-weight: 600;
+}
+
+.checkout-back-cart-link {
+    font-size: 13px;
+    font-weight: 600;
+    color: #334155;
+    text-decoration: none;
+    padding: 6px 12px;
+    border: 1px solid #cbd5e1;
+    border-radius: 6px;
+    transition: all 0.15s;
+}
+
+.checkout-back-cart-link:hover {
+    color: #d70018;
+    border-color: #d70018;
+    background: #fff5f5;
+}
+
+/* Nội dung chính 2 cột 60% - 40% */
+.checkout-main-area {
+    padding-top: 24px;
+    padding-bottom: 40px;
+    flex: 1;
+}
+
+.checkout-two-col-layout {
+    display: grid;
+    grid-template-columns: 1.45fr 1fr;
+    gap: 24px;
+    align-items: start;
+}
+
+@media (max-width: 900px) {
+    .checkout-two-col-layout {
+        grid-template-columns: 1fr;
+    }
+}
+
+.checkout-box-card {
+    background: #ffffff;
+    border-radius: 10px;
+    border: 1px solid #e2e8f0;
+    box-shadow: 0 2px 10px rgba(15, 23, 42, 0.04);
+    overflow: hidden;
+}
+
+/* Viền phong bì sọc đỏ-xanh đặc trưng của Shopee ở đầu thẻ Địa Chỉ Nhận Hàng */
+.shopee-envelope-stripe {
+    height: 4px;
+    width: 100%;
+    background-image: repeating-linear-gradient(
+        45deg,
+        #fa5252,
+        #fa5252 30px,
+        transparent 30px,
+        transparent 40px,
+        #339af0 40px,
+        #339af0 70px,
+        transparent 70px,
+        transparent 80px
+    );
+}
+
+.checkout-box-body {
+    padding: 22px 24px;
+}
+
+.checkout-section-title {
+    margin: 0 0 18px 0;
+    font-size: 17px;
+    font-weight: 700;
+    color: #d70018;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding-bottom: 12px;
+    border-bottom: 1px solid #f1f5f9;
+}
+
+.form-row-two-cols {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+}
+
+@media (max-width: 640px) {
+    .form-row-two-cols {
+        grid-template-columns: 1fr;
+        gap: 0;
+    }
+}
+
+.shopee-payment-options label {
+    display: inline-block;
+    font-size: 14px;
+    font-weight: 600;
+    color: #1e293b;
+    padding: 10px 8px;
+    cursor: pointer;
+}
+
+.checkout-sticky-summary {
+    position: sticky;
+    top: 84px;
+}
+
+.checkout-items-scroll {
+    max-height: 290px;
+    overflow-y: auto;
+    padding-right: 4px;
+}
+
+.checkout-terms-note {
+    margin: 12px 0 0 0;
+    font-size: 12px;
+    color: #64748b;
+    text-align: center;
+    line-height: 1.5;
+}
+
+.checkout-minimal-footer {
+    background: #ffffff;
+    border-top: 1px solid #e2e8f0;
+    padding: 18px 0;
+    text-align: center;
+    font-size: 13px;
+    color: #64748b;
+    margin-top: auto;
+}
+
+
+/* =========================================================================
+   6. STANDALONE SHOPEE-STYLE SHOPPING CART LAYOUT (68% - 32% TWO-COLUMN)
+   ========================================================================= */
+
+.shopee-empty-cart-card {
+    background: #ffffff;
+    border-radius: 12px;
+    border: 1px solid #e2e8f0;
+    padding: 60px 24px;
+    text-align: center;
+    box-shadow: 0 2px 10px rgba(15, 23, 42, 0.04);
+}
+
+.empty-cart-circle {
+    width: 84px;
+    height: 84px;
+    border-radius: 50%;
+    background: #fff5f5;
+    color: #d70018;
+    font-size: 40px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 14px;
+}
+
+.empty-cart-title {
+    margin: 0 0 8px 0;
+    font-size: 20px;
+    font-weight: 700;
+    color: #1e293b;
+}
+
+.empty-cart-desc {
+    margin: 0 0 18px 0;
+    font-size: 14px;
+    color: #64748b;
+}
+
+.shopee-freeship-banner {
+    background: #fffbeb;
+    border: 1px solid #fde68a;
+    color: #92400e;
+    padding: 12px 18px;
+    border-radius: 10px;
+    font-size: 14px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+.freeship-truck-icon {
+    font-size: 20px;
+    line-height: 1;
+}
+
+.cart-two-col-layout {
+    display: grid;
+    grid-template-columns: 2.1fr 1fr;
+    gap: 24px;
+    align-items: start;
+}
+
+@media (max-width: 900px) {
+    .cart-two-col-layout {
+        grid-template-columns: 1fr;
+    }
+}
+
+.shopee-cart-table th {
+    padding: 16px 18px;
+    font-size: 14px;
+    background: #f8fafc;
+    color: #475569;
+    border-bottom: 1px solid #e2e8f0;
+}
+
+.shopee-cart-table td {
+    padding: 18px;
+    font-size: 14px;
+    border-bottom: 1px solid #f1f5f9;
+}
+
+.cart-item-thumb-lg {
+    width: 72px;
+    height: 72px;
+    object-fit: contain;
+    border: 1px solid #e2e8f0;
+    border-radius: 8px;
+    padding: 4px;
+    background: #ffffff;
+}
+
+.cart-product-title-lg {
+    font-size: 15px;
+    font-weight: 700;
+    color: #0f172a;
+    text-decoration: none;
+    line-height: 1.4;
+}
+
+.cart-product-title-lg:hover {
+    color: #d70018;
+}
+
+.cart-product-badge {
+    font-size: 12px;
+    color: #64748b;
+    margin-top: 2px;
+}
+
+.shopee-qty-stepper {
+    display: inline-flex;
+    align-items: center;
+    border: 1px solid #cbd5e1;
+    border-radius: 6px;
+    overflow: hidden;
+    background: #ffffff;
+}
+
+.stepper-btn {
+    width: 32px;
+    height: 32px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background: #f8fafc;
+    color: #1e293b;
+    text-decoration: none;
+    font-size: 16px;
+    font-weight: 700;
+    transition: background 0.15s;
+}
+
+.stepper-btn:hover {
+    background: #e2e8f0;
+}
+
+.stepper-input {
+    width: 44px;
+    height: 32px;
+    border: none;
+    border-left: 1px solid #cbd5e1;
+    border-right: 1px solid #cbd5e1;
+    text-align: center;
+    font-size: 14px;
+    font-weight: 700;
+    color: #0f172a;
+    outline: none;
+}
+
+.cart-table-bottom-bar {
+    padding: 14px 18px;
+    background: #fafafa;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+
+/* =========================================================================
+   7. SHOPEE HORIZONTAL FULL-WIDTH CART LAYOUT (Cart.aspx ?v=8)
+   ========================================================================= */
+
+.shopee-cart-body {
+    margin: 0;
+    padding: 0;
+    background-color: #f5f5f5;
+    font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+    color: #222222;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+.shopee-container {
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 16px;
+    box-sizing: border-box;
+}
+
+/* 1. Thanh đỏ mỏng phía trên cùng (Top Utility Bar) */
+.shopee-top-navbar {
+    background: linear-gradient(-180deg, #d70018, #e62e2d);
+    color: #ffffff;
+    font-size: 13px;
+    padding: 7px 0;
+}
+
+.shopee-top-navbar-inner {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+.top-nav-left,
+.top-nav-right {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.top-nav-link {
+    color: #ffffff;
+    text-decoration: none;
+    font-weight: 500;
+}
+
+.top-nav-link:hover {
+    opacity: 0.85;
+    text-decoration: underline;
+}
+
+.top-nav-sep {
+    opacity: 0.4;
+}
+
+.top-nav-user {
+    font-weight: 700;
+}
+
+/* 2. Header trắng chính: Logo | Giỏ Hàng + Thanh tìm kiếm bên phải */
+.shopee-cart-header {
+    background: #ffffff;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.09);
+    padding: 20px 0;
+}
+
+.shopee-cart-header-inner {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 20px;
+    flex-wrap: wrap;
+}
+
+.shopee-brand-block {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+}
+
+.shopee-logo-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    text-decoration: none;
+}
+
+.shopee-logo-box {
+    width: 38px;
+    height: 38px;
+    border-radius: 8px;
+    background: #d70018;
+    color: #ffffff;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 20px;
+}
+
+.shopee-logo-name {
+    font-size: 24px;
+    font-weight: 800;
+    color: #d70018;
+    letter-spacing: -0.4px;
+}
+
+.shopee-logo-name span {
+    color: #1e293b;
+}
+
+.shopee-brand-divider {
+    width: 1px;
+    height: 30px;
+    background: #d70018;
+}
+
+.shopee-cart-page-title {
+    margin: 0;
+    font-size: 20px;
+    font-weight: 500;
+    color: #d70018;
+}
+
+/* Ô tìm kiếm viền đỏ bên phải Header */
+.shopee-header-search {
+    display: flex;
+    width: 100%;
+    max-width: 520px;
+    border: 2px solid #d70018;
+    border-radius: 4px;
+    overflow: hidden;
+    background: #ffffff;
+}
+
+.shopee-search-input {
+    flex: 1;
+    border: none;
+    padding: 9px 14px;
+    font-size: 14px;
+    outline: none;
+}
+
+.shopee-search-btn {
+    width: 72px;
+    border: none;
+    background: #d70018;
+    color: #ffffff;
+    font-size: 16px;
+    cursor: pointer;
+    transition: opacity 0.15s;
+}
+
+.shopee-search-btn:hover {
+    opacity: 0.9;
+}
+
+/* 3. Thân Giỏ hàng 1200px */
+.shopee-cart-main {
+    padding-top: 20px;
+    padding-bottom: 44px;
+    flex: 1;
+}
+
+/* Thanh tiêu đề cột (Product | Unit Price | Quantity | Total Price | Actions) */
+.shopee-cart-thead-bar {
+    display: flex;
+    align-items: center;
+    background: #ffffff;
+    border-radius: 3px;
+    box-shadow: 0 1px 1px 0 rgba(0, 0, 0, 0.05);
+    padding: 15px 20px;
+    margin-bottom: 12px;
+    font-size: 14px;
+    color: #888888;
+}
+
+.col-sp-product {
+    width: 46%;
+}
+
+.col-sp-price {
+    width: 15%;
+    text-align: center;
+}
+
+.col-sp-qty {
+    width: 16%;
+    text-align: center;
+}
+
+.col-sp-total {
+    width: 15%;
+    text-align: center;
+}
+
+.col-sp-action {
+    width: 8%;
+    text-align: center;
+}
+
+/* Khối Cửa Hàng & Sản phẩm */
+.shopee-shop-group-card {
+    background: #ffffff;
+    border-radius: 3px;
+    box-shadow: 0 1px 1px 0 rgba(0, 0, 0, 0.05);
+    margin-bottom: 16px;
+}
+
+.shopee-shop-header {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 14px 20px;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.09);
+    font-size: 14px;
+}
+
+.shopee-mall-tag {
+    background: #d0011b;
+    color: #ffffff;
+    font-size: 11px;
+    font-weight: 700;
+    padding: 2px 6px;
+    border-radius: 2px;
+    line-height: 1.2;
+}
+
+.shopee-shop-title {
+    color: rgba(0, 0, 0, 0.87);
+    font-weight: 600;
+}
+
+.shopee-shop-guarantee {
+    margin-left: auto;
+    font-size: 12px;
+    color: #64748b;
+}
+
+/* Từng dòng sản phẩm */
+.shopee-cart-item-row {
+    display: flex;
+    align-items: center;
+    padding: 20px;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+}
+
+.item-product-info {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    padding-right: 12px;
+    box-sizing: border-box;
+}
+
+.item-thumb-img {
+    width: 80px;
+    height: 80px;
+    object-fit: contain;
+    border: 1px solid #e8e8e8;
+    border-radius: 2px;
+    background: #ffffff;
+    flex-shrink: 0;
+}
+
+.item-text-wrap {
+    flex: 1;
+    min-width: 140px;
+}
+
+.item-name-link {
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    font-size: 14px;
+    font-weight: 500;
+    color: rgba(0, 0, 0, 0.87);
+    text-decoration: none;
+    line-height: 1.4;
+    margin-bottom: 6px;
+}
+
+.item-name-link:hover {
+    color: #d70018;
+}
+
+.item-promo-tags {
+    display: flex;
+    gap: 6px;
+    flex-wrap: wrap;
+}
+
+.promo-tag-red {
+    background: #d70018;
+    color: #ffffff;
+    font-size: 10px;
+    font-weight: 600;
+    padding: 1px 5px;
+    border-radius: 2px;
+}
+
+.promo-tag-outline {
+    border: 1px solid #d70018;
+    color: #d70018;
+    font-size: 10px;
+    font-weight: 500;
+    padding: 0 5px;
+    border-radius: 2px;
+}
+
+.item-variation-col {
+    width: 130px;
+    flex-shrink: 0;
+    display: flex;
+    flex-direction: column;
+    font-size: 13px;
+    color: rgba(0, 0, 0, 0.54);
+}
+
+.variation-label {
+    font-size: 12px;
+}
+
+.variation-value {
+    font-weight: 500;
+    color: rgba(0, 0, 0, 0.7);
+}
+
+.item-unit-price {
+    font-size: 14px;
+    color: rgba(0, 0, 0, 0.87);
+}
+
+/* Hộp tăng giảm số lượng [-][ 1 ][+] chuẩn Shopee */
+.shopee-qty-control {
+    display: inline-flex;
+    align-items: center;
+    border: 1px solid rgba(0, 0, 0, 0.14);
+    border-radius: 2px;
+    background: #ffffff;
+}
+
+.sp-qty-btn {
+    width: 32px;
+    height: 32px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    color: rgba(0, 0, 0, 0.8);
+    text-decoration: none;
+    font-size: 16px;
+    background: #ffffff;
+    transition: background 0.15s;
+}
+
+.sp-qty-btn:hover {
+    background: #f8f8f8;
+}
+
+.sp-qty-input {
+    width: 50px;
+    height: 32px;
+    border: none;
+    border-left: 1px solid rgba(0, 0, 0, 0.14);
+    border-right: 1px solid rgba(0, 0, 0, 0.14);
+    text-align: center;
+    font-size: 14px;
+    color: rgba(0, 0, 0, 0.87);
+    outline: none;
+}
+
+.item-total-price {
+    font-size: 15px;
+    font-weight: 600;
+    color: #ee4d2d;
+}
+
+.item-action-links {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 5px;
+}
+
+.sp-delete-link {
+    font-size: 14px;
+    color: rgba(0, 0, 0, 0.87);
+    text-decoration: none;
+}
+
+.sp-delete-link:hover {
+    color: #ee4d2d;
+}
+
+.sp-similar-link {
+    font-size: 12px;
+    color: #ee4d2d;
+    text-decoration: none;
+}
+
+.sp-similar-link:hover {
+    text-decoration: underline;
+}
+
+/* Dòng Ưu đãi phí vận chuyển ở chân thẻ Shop */
+.shopee-shop-footer-voucher {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 14px 20px;
+    background: #fffefb;
+    font-size: 13px;
+    color: rgba(0, 0, 0, 0.8);
+}
+
+.voucher-truck-badge {
+    color: #00bfa5;
+    font-weight: 700;
+}
+
+/* 4. Thanh Tổng Thanh Toán & Nút Mua Hàng Neo Dưới Đáy (Sticky Bottom Checkout Bar) */
+.shopee-sticky-checkout-bar {
+    position: sticky;
+    bottom: 0;
+    z-index: 99;
+    background: #ffffff;
+    border-radius: 3px;
+    box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.08);
+    padding: 16px 24px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 16px;
+    border-top: 1px solid #f0f0f0;
+}
+
+.sticky-bar-left {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    font-size: 14px;
+}
+
+.sp-bar-action-link {
+    color: rgba(0, 0, 0, 0.87);
+    text-decoration: none;
+    font-weight: 500;
+}
+
+.sp-bar-action-link:hover {
+    color: #d70018;
+}
+
+.sp-bar-sep {
+    color: #cbd5e1;
+}
+
+.sp-bar-clear-link {
+    color: #dc2626;
+    text-decoration: none;
+}
+
+.sp-bar-clear-link:hover {
+    text-decoration: underline;
+}
+
+.sticky-bar-right {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    flex-wrap: wrap;
+}
+
+.sp-total-summary {
+    display: flex;
+    align-items: baseline;
+    gap: 8px;
+}
+
+.sp-total-label {
+    font-size: 15px;
+    color: #222222;
+}
+
+.sp-total-amount {
+    font-size: 24px;
+    font-weight: 700;
+    color: #ee4d2d;
+}
+
+.shopee-checkout-btn {
+    min-width: 210px;
+    height: 42px;
+    padding: 0 28px;
+    background: #ee4d2d;
+    color: #ffffff !important;
+    font-size: 15px;
+    font-weight: 600;
+    border-radius: 3px;
+    text-decoration: none !important;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    transition: opacity 0.15s;
+    box-shadow: 0 1px 1px 0 rgba(0, 0, 0, 0.09);
+}
+
+.shopee-checkout-btn:hover {
+    background: #d73211;
+}
+
+@media (max-width: 768px) {
+    .shopee-cart-thead-bar,
+    .item-variation-col {
+        display: none;
+    }
+    .shopee-cart-item-row {
+        flex-wrap: wrap;
+        gap: 12px;
+    }
+    .col-sp-product {
+        width: 100%;
+    }
+    .col-sp-price,
+    .col-sp-qty,
+    .col-sp-total,
+    .col-sp-action {
+        width: auto;
+        flex: 1;
+    }
+}
+
+
+/* =========================================================================
+   8. FIX FULL-HEIGHT FORM FOOTER & SHOPEE "CÓ THỂ BẠN CŨNG THÍCH" GRID (?v=9)
+   ========================================================================= */
+
+.shopee-fullheight-form {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    margin: 0;
+}
+
+.shopee-empty-cart-card {
+    padding: 34px 20px;
+    margin-bottom: 24px;
+}
+
+.shopee-compact-footer {
+    background: #ffffff;
+    border-top: 1px solid #e2e8f0;
+    padding: 10px 0;
+    text-align: center;
+    font-size: 12px;
+    color: #64748b;
+    margin-top: auto;
+}
+
+/* Khối "CÓ THỂ BẠN CŨNG THÍCH" bên dưới Giỏ hàng chuẩn Shopee */
+.shopee-recommend-section {
+    margin-top: 24px;
+}
+
+.recommend-header-line {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 12px;
+}
+
+.recommend-heading {
+    margin: 0;
+    font-size: 15px;
+    font-weight: 700;
+    color: rgba(0, 0, 0, 0.54);
+    letter-spacing: 0.3px;
+}
+
+.recommend-view-all {
+    font-size: 13px;
+    color: #ee4d2d;
+    text-decoration: none;
+    font-weight: 600;
+}
+
+.recommend-view-all:hover {
+    text-decoration: underline;
+}
+
+.shopee-recommend-grid {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    gap: 12px;
+}
+
+@media (max-width: 1024px) {
+    .shopee-recommend-grid {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+
+@media (max-width: 640px) {
+    .shopee-recommend-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+.sp-rec-card {
+    background: #ffffff;
+    border: 1px solid #e8e8e8;
+    border-radius: 4px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    transition: transform 0.15s ease, box-shadow 0.15s ease, border-color 0.15s ease;
+}
+
+.sp-rec-card:hover {
+    transform: translateY(-2px);
+    border-color: #ee4d2d;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+}
+
+.sp-rec-img-wrap {
+    position: relative;
+    display: block;
+    padding: 12px;
+    background: #ffffff;
+    text-align: center;
+}
+
+.sp-rec-mall-badge {
+    position: absolute;
+    top: 8px;
+    left: 8px;
+    background: #d0011b;
+    color: #ffffff;
+    font-size: 10px;
+    font-weight: 700;
+    padding: 1px 5px;
+    border-radius: 2px;
+}
+
+.sp-rec-img {
+    width: 100%;
+    height: 120px;
+    object-fit: contain;
+}
+
+.sp-rec-body {
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    justify-content: space-between;
+    border-top: 1px solid #f8fafc;
+}
+
+.sp-rec-name {
+    font-size: 13px;
+    color: rgba(0, 0, 0, 0.87);
+    text-decoration: none;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    line-height: 1.35;
+    margin-bottom: 8px;
+    min-height: 35px;
+}
+
+.sp-rec-name:hover {
+    color: #d70018;
+}
+
+.sp-rec-bottom {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 6px;
+}
+
+.sp-rec-price {
+    font-size: 14px;
+    font-weight: 700;
+    color: #ee4d2d;
+}
+
+.sp-rec-add-btn {
+    font-size: 11px;
+    font-weight: 600;
+    color: #d70018;
+    background: #fff5f5;
+    border: 1px solid #d70018;
+    padding: 3px 7px;
+    border-radius: 3px;
+    text-decoration: none;
+    white-space: nowrap;
+}
+
+.sp-rec-add-btn:hover {
+    background: #d70018;
+    color: #ffffff;
+}

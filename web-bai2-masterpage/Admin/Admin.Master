@@ -1,0 +1,50 @@
+<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="Admin.master.cs" Inherits="web_bai2_masterpage.Admin.Admin" %>
+
+<!DOCTYPE html>
+
+<html>
+<head runat="server">
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title><%: Page.Title %> - Quản Trị Hệ Thống MyPhoneShop</title>
+
+    <!-- 1. Google Fonts Inter & Bootstrap 5 Local -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="anonymous" />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link href="<%= ResolveUrl("~/Content/bootstrap.min.css") %>" rel="stylesheet" type="text/css" />
+
+    <!-- 2. Module CSS riêng biệt cho toàn bộ phân hệ Admin -->
+    <link href="<%= ResolveUrl("~/Content/admin.css") %>?v=1" rel="stylesheet" type="text/css" />
+
+    <asp:ContentPlaceHolder ID="HeadContent" runat="server">
+    </asp:ContentPlaceHolder>
+</head>
+<body>
+    <form id="form1" runat="server">
+        <!-- Header Quản Trị -->
+        <header class="admin-header">
+            <div class="admin-brand">
+                <a href="<%= ResolveUrl("~/Admin/ProductList.aspx") %>" class="admin-logo">MyPhoneShop</a>
+                <span class="admin-badge">Admin Portal</span>
+            </div>
+            <!-- Menu Quản Trị Hệ Thống -->
+            <ul class="admin-nav">
+                <li><a href="<%= ResolveUrl("~/Admin/ProductList.aspx") %>">Quản Lý Sản Phẩm</a></li>
+                <li><a href="<%= ResolveUrl("~/Admin/ManageBrand.aspx") %>">Quản Lý Thương Hiệu</a></li>
+            </ul>
+            <!-- Tài khoản Admin & Thoát -->
+            <div class="admin-profile">
+                <span class="admin-user-tag">Xin chào: <strong><asp:Literal ID="litAdminName" runat="server" /></strong></span>
+                <a href="<%= ResolveUrl("~/default.aspx") %>" class="btn-view-shop" target="_blank">Xem Cửa Hàng</a>
+                <a href="<%= ResolveUrl("~/Logout.aspx") %>" class="btn-logout">Đăng Xuất</a>
+            </div>
+        </header>
+        <!-- Khung Nội Dung Toàn Chiều Rộng -->
+        <main class="admin-container">
+            <asp:ContentPlaceHolder ID="MainContent" runat="server">
+            </asp:ContentPlaceHolder>
+        </main>
+    </form>
+</body>
+</html>

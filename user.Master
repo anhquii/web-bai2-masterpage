@@ -1,0 +1,367 @@
+<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="user.master.cs" Inherits="web_bai2_masterpage.user" %>
+
+<!DOCTYPE html>
+
+<html>
+<head runat="server">
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>MyPhoneShop - Hệ Thống Điện Thoại Chính Hãng</title>
+
+    <!-- Nạp CSS kèm tham số ?v=2 để trình duyệt buộc tải lại CSS mới nhất, không dùng cache cũ -->
+    <link href="<%= ResolveUrl("~/Content/Site.css") %>?v=3" rel="stylesheet" type="text/css" />
+
+    <!-- ContentPlaceHolder để các trang con có thể chèn thêm Script/CSS/Meta riêng -->
+    <asp:ContentPlaceHolder ID="HeadContent" runat="server">
+    </asp:ContentPlaceHolder>
+</head>
+<body>
+    <form id="form1" runat="server">
+        
+        <!-- ========================================================================= -->
+        <!-- 2. ĐÂY LÀ BANNER (Theo Slide 7 Layout & CellphoneS Red Header)             -->
+        <!-- ========================================================================= -->
+        <header class="main-banner">
+            <div class="site-container banner-content">
+                <!-- Logo MyPhoneShop (chữ đỏ trên nền trắng nổi bật) -->
+                <a href="<%= ResolveUrl("~/Default.aspx") %>" class="shop-logo">
+                    <span class="logo-badge">&#9776;</span>
+                    <div class="logo-text-group">
+                        <span class="logo-title">MyPhone<span class="logo-highlight">Shop</span></span>
+                        <span class="logo-slogan">Điện Thoại &amp; Công Nghệ Chính Hãng</span>
+                    </div>
+                </a>
+
+                                <!-- Thanh tìm kiếm to bản kết nối SearchAjax -->
+                <div class="banner-search-box">
+                    <div class="search-input-wrapper">
+                        <input type="text" id="masterSearchInput" class="master-search-input" placeholder="Bạn thích sản phẩm gì? (VD: iPhone, Samsung, Xiaomi...)" autocomplete="off" />
+                        <a id="btnMasterSearch" href="<%= ResolveUrl("~/SearchAjax.aspx") %>" class="btn-search-trigger" title="Nhấn để tìm kiếm">Tìm Kiếm</a>
+                    </div>
+
+                    <!-- [MỚI] Hộp Dropdown gợi ý kết quả thời gian thực (Ẩn mặc định) -->
+                    <div id="searchDropdown" class="search-dropdown-popup" style="display: none;">
+                        <div class="dropdown-header">Sản phẩm gợi ý</div>
+                        <div id="dropdownResults" class="dropdown-results-list">
+                            <!-- JavaScript sẽ nhồi danh sách sản phẩm xem nhanh vào đây -->
+                        </div>
+                        <a id="btnViewAllResults" href="<%= ResolveUrl("~/SearchAjax.aspx") %>" class="dropdown-footer-link">
+                            Xem tất cả kết quả ➔
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Tiện ích bên phải (Nút Lọc, Đăng Nhập, Đăng Ký / Chào Thành Viên) -->
+                <div class="banner-actions">
+                    
+
+                    <!-- Khối khi CHƯA đăng nhập -->
+                    <asp:PlaceHolder ID="phAnonymous" runat="server">
+                        <div class="auth-buttons">
+                            <a href="<%= ResolveUrl("~/Login.aspx") %>" class="btn-auth-user btn-auth-login">Đăng Nhập</a>
+                            <a href="<%= ResolveUrl("~/Register.aspx") %>" class="btn-auth-user btn-auth-register">Đăng Ký</a>
+                        </div>
+                    </asp:PlaceHolder>
+
+                    <!-- Khối khi ĐÃ đăng nhập -->
+                    <asp:PlaceHolder ID="phLoggedIn" runat="server" Visible="false">
+                        <div class="logged-user-box">
+                            <div class="user-info">
+                                <span class="user-greeting">Xin chào,</span>
+                                <strong class="user-name"><asp:Literal ID="litUsername" runat="server" /></strong>
+                            </div>
+                            <a href="<%= ResolveUrl("~/Logout.aspx") %>" class="btn-auth-logout">Đăng Xuất</a>
+                        </div>
+                    </asp:PlaceHolder>
+                </div>
+            </div>
+        </header>
+        <!-- ========================================================================= -->
+        <!-- 3. ĐÂY LÀ MENU CHÍNH (Theo đúng Slide 7 Chapter 2.3 Layout)                -->
+        <!-- ========================================================================= -->
+        <nav class="main-menu-nav">
+            <div class="site-container main-menu-content">
+                <ul class="nav-menu-list">
+                    <!-- Nút Trang Chủ -->
+                    <li class="nav-item">
+                        <a href="<%= ResolveUrl("~/Default.aspx") %>" class="nav-btn active">&#9750; Trang Chủ</a>
+                    </li>
+
+                    <!-- REPEATER MENU CHA: Nạp từ CSDL dbo.Menus (Parent = 0) -->
+                    <asp:Repeater ID="rptParentMenus" runat="server" OnItemDataBound="rptParentMenus_ItemDataBound">
+                        <ItemTemplate>
+                            <li class="nav-item dropdown">
+                                <a href='<%# ResolveUrl("~/" + Eval("UrlLink")) %>' class="nav-btn dropdown-toggle">
+                                    <%# Eval("Lable") %> <span class="nav-arrow">&#9662;</span>
+                                </a>
+
+                                <!-- REPEATER MENU CON: Xổ xuống khi rê chuột (Parent = ID_MN cha) -->
+                                <ul id="pnlDropdown" runat="server" class="dropdown-menu">
+                                    <asp:Repeater ID="rptChildMenus" runat="server">
+                                        <ItemTemplate>
+                                            <li class="dropdown-item">
+                                                <a href='<%# ResolveUrl("~/" + Eval("UrlLink")) %>' class="dropdown-link">
+                                                    &bull; <%# Eval("Lable") %>
+                                                </a>
+                                            </li>
+                                        </ItemTemplate>
+                                    </asp:Repeater>
+                                </ul>
+                            </li>
+                        </ItemTemplate>
+                    </asp:Repeater>
+
+                    <!-- Link Admin (Nếu có quyền) -->
+                    <li class="nav-item nav-item-admin">
+                        <asp:HyperLink ID="lnkAdmin" runat="server" NavigateUrl="~/Admin/ProductList.aspx" CssClass="nav-btn nav-btn-admin" Visible="false">&#9881; Trang Admin</asp:HyperLink>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+        <!-- ========================================================================= -->
+        <!-- 4. KHUNG 3 CỘT (Slide 7: [ Menu con ] | [ Nội dung tin ] | [ Tin nóng ]) -->
+        <!-- ========================================================================= -->
+        <div class="site-container body-layout-wrapper">
+            <!-- CỘT TRÁI: MENU CON (Slide: Menu con / CellphoneS: Danh mục dọc) -->
+            
+
+                <!-- Khối lọc theo mức giá -->
+            <aside class="layout-col-left">
+                <div class="side-box">
+                    <div class="side-box-header header-blue">
+                        <span class="header-icon">&#9783;</span>
+                        <h3>MỨC GIÁ PHỔ BIẾN</h3>
+                    </div>
+                    <div class="side-menu-list">
+                        <a href="<%= ResolveUrl("~/Default.aspx") %>" class="side-menu-item"><span class="item-name">&rsaquo; Dưới 5 Triệu</span></a>
+                        <a href="<%= ResolveUrl("~/Default.aspx") %>" class="side-menu-item"><span class="item-name">&rsaquo; Từ 5 - 10 Triệu</span></a>
+                        <a href="<%= ResolveUrl("~/Default.aspx") %>" class="side-menu-item"><span class="item-name">&rsaquo; Từ 10 - 20 Triệu</span></a>
+                        <a href="<%= ResolveUrl("~/Default.aspx") %>" class="side-menu-item"><span class="item-name">&rsaquo; Trên 20 Triệu</span></a>
+                    </div>
+                </div>
+            </aside>
+
+            <!-- CỘT GIỮA: NỘI DUNG TIN (Slide: Nội dung tin - ContentPlaceHolder) -->
+            <main class="layout-col-center">
+                <asp:ContentPlaceHolder ID="MainContent" runat="server">
+                </asp:ContentPlaceHolder>
+            </main>
+
+            <!-- CỘT PHẢI: TIN NÓNG (Slide: Tin nóng / DTHU: Thông báo / CellphoneS) -->
+            <aside class="layout-col-right">
+                <div class="side-box">
+                    <div class="side-box-header header-red">
+                        <span class="header-icon">&#128293;</span>
+                        <h3>TIN NÓNG CÔNG NGHỆ</h3>
+                    </div>
+                    <div class="side-news-list">
+                        <div class="news-item">
+                            <span class="news-tag tag-hot">HOT</span>
+                            <a href="#" class="news-title">iPhone 15 Pro Max giảm giá sốc cuối tuần này</a>
+                        </div>
+                        <div class="news-item">
+                            <span class="news-tag">MỚI</span>
+                            <a href="#" class="news-title">Đánh giá Galaxy S24 Ultra: Quyền năng AI dẫn đầu</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="side-box box-guarantee">
+                    <div class="side-box-header header-blue">
+                        <span class="header-icon">&#10004;</span>
+                        <h3>CAM KẾT DỊCH VỤ</h3>
+                    </div>
+                    <ul class="guarantee-list">
+                        <li><strong>100%</strong> Hàng chính hãng VN/A</li>
+                        <li><strong>1 đổi 1</strong> trong 30 ngày nếu lỗi</li>
+                        <li><strong>Bảo hành 12 tháng</strong> ủy quyền</li>
+                    </ul>
+                </div>
+            </aside>
+        </div>
+
+        <!-- ========================================================================= -->
+        <!-- 5. ĐÂY LÀ BOTTOM (Theo đúng Slide 7 Chapter 2.3 Layout - Footer 4 Cột)    -->
+        <!-- ========================================================================= -->
+        <footer class="main-bottom-footer">
+            <div class="site-container footer-cols-grid">
+                <div class="footer-col">
+                    <h4 class="footer-col-title">VỀ MYPHONESHOP</h4>
+                    <p class="footer-text">Hệ thống phân phối điện thoại di động chính hãng hàng đầu tại Việt Nam.</p>
+                    <p class="footer-text">Đồ án thực hành môn Lập trình Web ASP.NET.</p>
+                </div>
+                <div class="footer-col">
+                    <h4 class="footer-col-title">CHÍNH SÁCH MUA HÀNG</h4>
+                    <ul class="footer-links-list">
+                        <li><a href="#">Chính sách bảo hành 12 tháng</a></li>
+                        <li><a href="#">Chính sách 1 đổi 1 trong 30 ngày</a></li>
+                        <li><a href="#">Giao hàng siêu tốc toàn quốc</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4 class="footer-col-title">TỔNG ĐÀI HỖ TRỢ</h4>
+                    <ul class="footer-hotlines-list">
+                        <li>Tư vấn: <strong>1800.2097</strong> (Miễn phí)</li>
+                        <li>Bảo hành: <strong>1800.2098</strong></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4 class="footer-col-title">PHƯƠNG THỨC THANH TOÁN</h4>
+                    <p class="footer-text">Visa, MasterCard, MoMo, VNPAY QR, Trả góp 0%, Tiền mặt (COD).</p>
+
+        <button type="button" id="btnBackToTop" class="btn-back-to-top" title="Cuộn lên đầu trang">&#8679;</button>
+         <script src="<%= ResolveUrl("~/Scripts/jquery-3.6.0.min.js") %>" type="text/javascript"></script>
+
+                </div>
+            </div>
+            
+        </footer>
+
+        
+                        <!-- Script jQuery điều khiển hiệu ứng cuộn trang -->
+        <script type="text/javascript">
+$(document).ready(function () {
+    // Hiện nút khi người dùng cuộn chuột xuống quá 250px
+    $(window).scroll(function () {
+        var currentTop = $(this).scrollTop() || 0;
+        if (currentTop > 250) {
+            $('#btnBackToTop').fadeIn(200);
+        } else {
+            $('#btnBackToTop').fadeOut(200);
+        }
+    });
+
+    // Nhấp vào nút để cuộn mượt mà lên đỉnh trang
+    $('#btnBackToTop').click(function () {
+
+        $('html, body').animate({ scrollTop: 0 }, 400);
+        return false;
+    });
+
+        // =========================================================================
+        // KỊCH BẢN LIVE SEARCH DROPDOWN TOÀN WEBSITE (CELLPHONES STYLE)
+        // =========================================================================
+        var searchTimer;
+        var $searchInput = $("#masterSearchInput");
+        var $searchDropdown = $("#searchDropdown");
+        var $dropdownResults = $("#dropdownResults");
+        var $btnViewAll = $("#btnViewAllResults");
+
+        var searchApiUrl = '<%= ResolveUrl("~/SearchAjax.aspx/SearchProducts") %>';
+        var fullSearchUrl = '<%= ResolveUrl("~/SearchAjax.aspx?q=") %>';
+        var detailUrl = '<%= ResolveUrl("~/ProductDetail.aspx?id=") %>';
+        var imagesUrl = '<%= ResolveUrl("~/Images/") %>';
+        var noImageUrl = '<%= ResolveUrl("~/Images/no-image.svg") %>';
+
+        // 1. Bắt sự kiện khi người dùng gõ phím vào thanh Header
+        $searchInput.on("input", function () {
+            clearTimeout(searchTimer);
+            var keyword = $(this).val().trim();
+
+            // Nếu xóa trắng ô tìm kiếm thì ẩn ngay dropdown
+            if (keyword.length === 0) {
+                $searchDropdown.hide();
+                return;
+            }
+
+            // Debounce 300ms: Chờ ngừng gõ 300ms mới gửi request
+            searchTimer = setTimeout(function () {
+                fetchDropdownProducts(keyword);
+            }, 300);
+        });
+
+        // 2. Hàm gọi Ajax lấy dữ liệu ngầm từ C# [WebMethod]
+        function fetchDropdownProducts(keyword) {
+            $.ajax({
+                type: "POST",
+                url: searchApiUrl,
+                data: JSON.stringify({ keyword: keyword }),
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                success: function (response) {
+                    var products = response.d || [];
+                    renderDropdown(products, keyword);
+                },
+                error: function (xhr, status, error) {
+                    console.error("Lỗi tìm kiếm Header:", error);
+                }
+            });
+        }
+
+        // 3. Hàm vẽ 5 sản phẩm xem nhanh vào Dropdown
+        function renderDropdown(products, keyword) {
+            $dropdownResults.empty();
+
+            if (products.length === 0) {
+                $dropdownResults.html('<div class="dropdown-empty">Không tìm thấy sản phẩm nào phù hợp!</div>');
+                $btnViewAll.hide();
+                $searchDropdown.fadeIn(150);
+                return;
+            }
+
+            // Cập nhật link xem đầy đủ dưới đáy popup
+            $btnViewAll.show()
+                .attr("href", fullSearchUrl + encodeURIComponent(keyword))
+                .text('Xem tất cả ' + products.length + ' kết quả cho "' + keyword + '" ➔');
+
+            // Chỉ lấy tối đa 5 sản phẩm nổi bật nhất để popup không bị quá dài
+            var topProducts = products.slice(0, 5);
+
+            $.each(topProducts, function (i, item) {
+                var formattedPrice = new Intl.NumberFormat('vi-VN').format(item.Price) + " đ";
+                var imgSrc = item.Image ? (imagesUrl + item.Image) : noImageUrl;
+
+                var itemHtml =
+                    '<a href="' + detailUrl + item.ProductId + '" class="search-dropdown-item">' +
+                    '<img src="' + imgSrc + '" alt="' + item.ProductName + '" class="dropdown-thumb" onerror="this.src=\'' + noImageUrl + '\';" />' +
+                    '<div class="dropdown-info">' +
+                    '<div class="dropdown-name" title="' + item.ProductName + '">' + item.ProductName + '</div>' +
+                    '<div class="dropdown-meta">' +
+                    '<span class="dropdown-brand">' + (item.BrandName || "Chính hãng") + '</span>' +
+                    '<span class="dropdown-price">' + formattedPrice + '</span>' +
+                    '</div>' +
+                    '</div>' +
+                    '</a>';
+
+                $dropdownResults.append(itemHtml);
+            });
+
+            $searchDropdown.fadeIn(150);
+        }
+
+        // 4. Kỹ thuật "Click Outside": Click chuột ra ngoài thì tự động ẩn popup
+        $(document).on("click", function (e) {
+            if (!$(e.target).closest(".banner-search-box").length) {
+                $searchDropdown.fadeOut(150);
+            }
+        });
+
+        // 5. Khi người dùng nhấn phím ENTER: Chuyển thẳng sang trang xem toàn bộ kết quả
+        $searchInput.on("keydown", function (e) {
+            if (e.keyCode === 13) {
+                e.preventDefault(); // Chặn việc submit form làm reload trang
+                var kw = $(this).val().trim();
+                if (kw) {
+                    window.location.href = fullSearchUrl + encodeURIComponent(kw);
+                }
+            }
+        });
+
+        // 6. Nhấn nút "Tìm Kiếm" màu đỏ bên cạnh ô input
+        $("#btnMasterSearch").on("click", function (e) {
+            e.preventDefault();
+            var kw = $searchInput.val().trim();
+            window.location.href = fullSearchUrl + encodeURIComponent(kw);
+        });
+
+});
+        </script>
+    
+    
+        <p>
+            &nbsp;</p>
+    
+    
+    </form>
+</body>
+</html>

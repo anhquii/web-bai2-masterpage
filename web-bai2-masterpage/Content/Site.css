@@ -1,0 +1,17 @@
+﻿/* ==========================================================================
+   MYPHONESHOP - KIẾN TRÚC ĐA FILE CSS (MODULAR CSS ARCHITECTURE - PHASE B2 & B3)
+   ==========================================================================
+   Toàn bộ CSS của hệ thống đã được tách thành 6 module độc lập theo phân hệ:
+   1. Content/layout.css        : Khung Master Page 3 cột, Header, Sticky Menu, Sidebar, Footer
+   2. Content/product.css       : Hero Promo Slider, Lưới Card Sản Phẩm & Chi Tiết Sản Phẩm
+   3. Content/search.css        : Live Search Dropdown trên Header & Trang SearchAjax.aspx
+   4. Content/auth.css          : Trang Đăng Nhập (Login.aspx) & Đăng Ký (Register.aspx)
+   5. Content/admin.css         : Phân hệ Quản Trị Hệ Thống (Admin.Master & các trang Admin)
+   6. Content/cart-checkout.css : Giỏ Hàng Shopee (Cart.aspx) & Thanh Toán VietQR (Checkout.aspx)
+   ========================================================================== */
+
+@import url("layout.css");
+@import url("product.css");
+@import url("search.css");
+@import url("auth.css");
+@import url("cart-checkout.css");

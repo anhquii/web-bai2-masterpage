@@ -1,0 +1,150 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="Admin.master.cs" Inherits="web_bai2_masterpage.Admin.Admin" %>
+
+<!DOCTYPE html>
+
+<html>
+<head runat="server">
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title><%: Page.Title %> - Quản Trị Hệ Thống MyPhoneShop</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+        }
+        body {
+            background-color: #f1f5f9;
+            color: #1e293b;
+        }
+        /* --- Header Thanh Quản Trị --- */
+        .admin-header {
+            background-color: #0f172a;
+            color: #ffffff;
+            padding: 0 24px;
+            height: 64px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+        }
+        .admin-brand {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        .admin-logo {
+            font-size: 18px;
+            font-weight: 800;
+            letter-spacing: 0.5px;
+            color: #ffffff;
+            text-decoration: none;
+        }
+        .admin-badge {
+            background-color: #d70018;
+            color: #ffffff;
+            font-size: 11px;
+            font-weight: 700;
+            padding: 3px 8px;
+            border-radius: 4px;
+            text-transform: uppercase;
+        }
+        /* --- Menu Điều Hướng Admin --- */
+        .admin-nav {
+            display: flex;
+            gap: 8px;
+            list-style: none;
+        }
+        .admin-nav a {
+            color: #cbd5e1;
+            text-decoration: none;
+            padding: 8px 14px;
+            border-radius: 6px;
+            font-size: 14px;
+            font-weight: 600;
+            transition: all 0.2s;
+        }
+        .admin-nav a:hover {
+            background-color: #1e293b;
+            color: #ffffff;
+        }
+        /* --- Khu vực User Profile góc phải --- */
+        .admin-profile {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+        .admin-user-tag {
+            font-size: 13px;
+            color: #94a3b8;
+        }
+        .admin-user-tag strong {
+            color: #38bdf8;
+        }
+        .btn-view-shop {
+            background-color: #1e293b;
+            color: #f8fafc;
+            text-decoration: none;
+            padding: 6px 12px;
+            border-radius: 4px;
+            font-size: 13px;
+            border: 1px solid #334155;
+            transition: background 0.2s;
+        }
+        .btn-view-shop:hover {
+            background-color: #334155;
+        }
+        .btn-logout {
+            background-color: #ef4444;
+            color: #ffffff;
+            text-decoration: none;
+            padding: 6px 12px;
+            border-radius: 4px;
+            font-size: 13px;
+            font-weight: 600;
+            transition: background 0.2s;
+        }
+        .btn-logout:hover {
+            background-color: #dc2626;
+        }
+        /* --- Vùng Nội Dung Chính (Rộng thoáng không bị bó hẹp) --- */
+        .admin-container {
+            max-width: 1400px;
+            margin: 24px auto;
+            padding: 0 20px;
+        }
+    </style>
+
+    <asp:ContentPlaceHolder ID="HeadContent" runat="server">
+    </asp:ContentPlaceHolder>
+</head>
+<body>
+    <form id="form1" runat="server">
+        <!-- Header Quản Trị -->
+        <header class="admin-header">
+            <div class="admin-brand">
+                <a href="<%= ResolveUrl("~/Admin/ProductList.aspx") %>" class="admin-logo">📱 MyPhoneShop</a>
+                <span class="admin-badge">Admin Portal</span>
+            </div>
+            <!-- Menu Quản Trị Hệ Thống -->
+            <ul class="admin-nav">
+                <li><a href="<%= ResolveUrl("~/Admin/ProductList.aspx") %>">📦 Quản Lý Sản Phẩm</a></li>
+                <li><a href="<%= ResolveUrl("~/Admin/ManageBrand.aspx") %>">🏷️ Quản Lý Thương Hiệu</a></li>
+            </ul>
+            <!-- Tài khoản Admin & Thoát -->
+            <div class="admin-profile">
+                <span class="admin-user-tag">Xin chào: <strong><asp:Literal ID="litAdminName" runat="server" /></strong></span>
+                <a href="<%= ResolveUrl("~/default.aspx") %>" class="btn-view-shop" target="_blank">🛒 Xem Cửa Hàng</a>
+                <a href="<%= ResolveUrl("~/Logout.aspx") %>" class="btn-logout">🚪 Đăng Xuất</a>
+            </div>
+        </header>
+        <!-- Khung Nội Dung Toàn Chiều Rộng -->
+        <main class="admin-container">
+            <asp:ContentPlaceHolder ID="MainContent" runat="server">
+            </asp:ContentPlaceHolder>
+        </main>
+    </form>
+</body>
+</html>

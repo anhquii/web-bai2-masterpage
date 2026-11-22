@@ -1,0 +1,137 @@
+/* ==========================================================================
+   MODULE 4: Content/auth.css
+   VAI TRÒ: Giao diện Đăng Nhập (Login.aspx) & Đăng Ký (Register.aspx)
+            (Tách 100% khỏi thẻ <style> nội tuyến trong .aspx)
+   ========================================================================== */
+
+.login-wrapper,
+.register-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 36px 15px;
+}
+
+.login-card,
+.register-card {
+    background: #ffffff;
+    width: 100%;
+    max-width: 440px;
+    padding: 34px 32px;
+    border-radius: 16px;
+    box-shadow: 0 12px 32px rgba(15, 23, 42, 0.08);
+    border: 1px solid #e2e8f0;
+    border-top: 4px solid #d70018;
+}
+
+.login-title,
+.register-title {
+    text-align: center;
+    font-size: 22px;
+    font-weight: 800;
+    color: #d70018;
+    margin-bottom: 24px;
+    text-transform: uppercase;
+    letter-spacing: 0.4px;
+}
+
+.form-group {
+    margin-bottom: 18px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 7px;
+    font-weight: 700;
+    font-size: 13.5px;
+    color: #334155;
+}
+
+.form-control-input {
+    width: 100%;
+    padding: 11px 14px;
+    border: 1px solid #cbd5e1;
+    border-radius: 8px;
+    font-size: 14px;
+    box-sizing: border-box;
+    outline: none;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.form-control-input:focus {
+    border-color: #d70018;
+    box-shadow: 0 0 0 3px rgba(215, 0, 24, 0.12);
+}
+
+.form-checkbox {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 14px;
+    color: #475569;
+    margin-bottom: 20px;
+}
+
+.btn-login-submit,
+.btn-register-submit {
+    width: 100%;
+    padding: 12px;
+    background: linear-gradient(135deg, #e11d48 0%, #b91c1c 100%);
+    color: #ffffff;
+    border: none;
+    border-radius: 8px;
+    font-size: 15px;
+    font-weight: 800;
+    cursor: pointer;
+    margin-top: 6px;
+    transition: all 0.2s ease;
+}
+
+.btn-login-submit:hover,
+.btn-register-submit:hover {
+    background: linear-gradient(135deg, #be123c 0%, #991b1b 100%);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 16px rgba(215, 0, 24, 0.3);
+}
+
+.msg-alert {
+    display: block;
+    padding: 11px 14px;
+    border-radius: 8px;
+    font-size: 13.5px;
+    font-weight: 600;
+    margin-bottom: 18px;
+    text-align: center;
+}
+
+.msg-error {
+    background-color: #fef2f2;
+    color: #dc2626;
+    border: 1px solid #fecaca;
+}
+
+.msg-success {
+    background-color: #f0fdf4;
+    color: #16a34a;
+    border: 1px solid #bbf7d0;
+}
+
+.login-footer-link,
+.register-footer-link {
+    text-align: center;
+    margin-top: 20px;
+    font-size: 14px;
+    color: #64748b;
+}
+
+.login-footer-link a,
+.register-footer-link a {
+    color: #d70018;
+    font-weight: 700;
+    text-decoration: none;
+}
+
+.login-footer-link a:hover,
+.register-footer-link a:hover {
+    text-decoration: underline;
+}

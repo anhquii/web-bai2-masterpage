@@ -1,0 +1,105 @@
+<mxfile host="app.diagrams.net" modified="2026-11-05T11:40:00.000Z" agent="Antigravity" version="24.0.0" type="device" pages="3">
+  <!-- TAB 1: USE CASE DIAGRAM -->
+  <diagram id="use-case-b3" name="1. Sơ Đồ Use Case (Giỏ Hàng &amp; Thanh Toán)">
+    <mxGraphModel dx="1422" dy="794" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1169" pageHeight="827" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="sys" value="HỆ THỐNG GIỎ HÀNG &amp; THANH TOÁN (MYPHONESHOP - PHASE B3)" style="swimlane;whiteSpace=wrap;html=1;fillColor=#f8fafc;strokeColor=#0f172a;fontStyle=1;fontSize=14;startSize=35;" vertex="1" parent="1">
+          <mxGeometry x="260" y="40" width="760" height="680" as="geometry" />
+        </mxCell>
+        <mxCell id="uc1" value="UC01: Xem chi tiết SP &amp; Chọn số lượng [-][1][+]" style="ellipse;whiteSpace=wrap;html=1;fillColor=#e0f2fe;strokeColor=#0284c7;fontStyle=1;" vertex="1" parent="sys">
+          <mxGeometry x="70" y="60" width="250" height="65" as="geometry" />
+        </mxCell>
+        <mxCell id="uc2" value="UC02: Thêm vào giỏ hàng (Session[&#39;Cart&#39;] + Toast)" style="ellipse;whiteSpace=wrap;html=1;fillColor=#fef2f2;strokeColor=#d70018;fontStyle=1;" vertex="1" parent="sys">
+          <mxGeometry x="70" y="155" width="250" height="65" as="geometry" />
+        </mxCell>
+        <mxCell id="uc3" value="UC03: Mua ngay (Thêm giỏ + Chuyển thẳng Checkout)" style="ellipse;whiteSpace=wrap;html=1;fillColor=#fef2f2;strokeColor=#d70018;fontStyle=1;" vertex="1" parent="sys">
+          <mxGeometry x="70" y="250" width="250" height="65" as="geometry" />
+        </mxCell>
+        <mxCell id="uc4" value="UC04: Quản lý Giỏ hàng (Tăng/Giảm/Xóa AJAX UpdatePanel)" style="ellipse;whiteSpace=wrap;html=1;fillColor=#e0f2fe;strokeColor=#0284c7;fontStyle=1;" vertex="1" parent="sys">
+          <mxGeometry x="70" y="350" width="250" height="65" as="geometry" />
+        </mxCell>
+        <mxCell id="uc5" value="UC05: Thêm SP gợi ý (Có thể bạn cũng thích)" style="ellipse;whiteSpace=wrap;html=1;fillColor=#f0fdf4;strokeColor=#16a34a;fontStyle=1;" vertex="1" parent="sys">
+          <mxGeometry x="70" y="450" width="250" height="65" as="geometry" />
+        </mxCell>
+        <mxCell id="uc6" value="UC06: Đặt hàng &amp; Xuất hóa đơn #MPS{OrderId}" style="ellipse;whiteSpace=wrap;html=1;fillColor=#fef3c7;strokeColor=#d97706;fontStyle=1;" vertex="1" parent="sys">
+          <mxGeometry x="70" y="555" width="250" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="uc7" value="UC06.1: Thanh toán COD&#xa;(Ship 30k nếu &lt; 5tr, 0đ nếu &gt;= 5tr)" style="ellipse;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#475569;" vertex="1" parent="sys">
+          <mxGeometry x="450" y="490" width="250" height="65" as="geometry" />
+        </mxCell>
+        <mxCell id="uc8" value="UC06.2: Chuyển khoản VietQR MB Bank&#xa;(Freeship 0đ + Sinh QR động Napas247)" style="ellipse;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#0284c7;" vertex="1" parent="sys">
+          <mxGeometry x="450" y="585" width="250" height="65" as="geometry" />
+        </mxCell>
+        <mxCell id="ext1" value="&amp;lt;&amp;lt;extend&amp;gt;&amp;gt;" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;dashed=1;endArrow=open;" edge="1" parent="sys" source="uc7" target="uc6">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="ext2" value="&amp;lt;&amp;lt;extend&amp;gt;&amp;gt;" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;dashed=1;endArrow=open;" edge="1" parent="sys" source="uc8" target="uc6">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <!-- Actor -->
+        <mxCell id="actor" value="Khách Mua Hàng&#xa;(Guest / User)" style="shape=umlActor;verticalLabelPosition=bottom;verticalAlign=top;html=1;outlineConnect=0;fillColor=#d70018;strokeColor=#991b1b;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="90" y="320" width="50" height="100" as="geometry" />
+        </mxCell>
+        <mxCell id="e1" style="endArrow=none;html=1;" edge="1" parent="1" source="actor" target="uc1"><mxGeometry relative="1" as="geometry" /></mxCell>
+        <mxCell id="e2" style="endArrow=none;html=1;" edge="1" parent="1" source="actor" target="uc2"><mxGeometry relative="1" as="geometry" /></mxCell>
+        <mxCell id="e3" style="endArrow=none;html=1;" edge="1" parent="1" source="actor" target="uc3"><mxGeometry relative="1" as="geometry" /></mxCell>
+        <mxCell id="e4" style="endArrow=none;html=1;" edge="1" parent="1" source="actor" target="uc4"><mxGeometry relative="1" as="geometry" /></mxCell>
+        <mxCell id="e5" style="endArrow=none;html=1;" edge="1" parent="1" source="actor" target="uc5"><mxGeometry relative="1" as="geometry" /></mxCell>
+        <mxCell id="e6" style="endArrow=none;html=1;" edge="1" parent="1" source="actor" target="uc6"><mxGeometry relative="1" as="geometry" /></mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+
+  <!-- TAB 2: SEQUENCE DIAGRAM -->
+  <diagram id="seq-b3" name="2. Sơ Đồ Tuần Tự (Sequence Diagram)">
+    <mxGraphModel dx="1422" dy="794" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1169" pageHeight="827" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="s_title" value="SƠ ĐỒ TUẦN TỰ: LUỒNG THÊM GIỎ HÀNG ➔ THANH TOÁN ĐA HÌNH ➔ LƯU ĐƠN HÀNG (OOP &amp; SOLID)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#0f172a;fontColor=#ffffff;fontStyle=1;fontSize=13;" vertex="1" parent="1">
+          <mxGeometry x="40" y="20" width="1080" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="p1" value="Khách Hàng" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fee2e2;strokeColor=#d70018;fontStyle=1;" vertex="1" parent="1"><mxGeometry x="40" y="80" width="120" height="40" as="geometry" /></mxCell>
+        <mxCell id="p2" value="UI Layer&#xa;(ProductDetail / Cart / Checkout)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e0f2fe;strokeColor=#0284c7;fontStyle=1;" vertex="1" parent="1"><mxGeometry x="210" y="80" width="180" height="40" as="geometry" /></mxCell>
+        <mxCell id="p3" value="BLL: CartService&#xa;(Session[&#39;Cart&#39;])" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fef3c7;strokeColor=#d97706;fontStyle=1;" vertex="1" parent="1"><mxGeometry x="440" y="80" width="160" height="40" as="geometry" /></mxCell>
+        <mxCell id="p4" value="BLL: OrderService&#xa;&amp; IPaymentMethod" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fef3c7;strokeColor=#d97706;fontStyle=1;" vertex="1" parent="1"><mxGeometry x="650" y="80" width="180" height="40" as="geometry" /></mxCell>
+        <mxCell id="p5" value="DAL: OrderRepository&#xa;&amp; SQL Server (MyStoreTech)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f0fdf4;strokeColor=#16a34a;fontStyle=1;" vertex="1" parent="1"><mxGeometry x="880" y="80" width="220" height="40" as="geometry" /></mxCell>
+
+        <mxCell id="step1" value="1. Bấm [Thêm Vào Giỏ Hàng] / [Mua Ngay] (productId, qty)" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#0284c7;" vertex="1" parent="1"><mxGeometry x="80" y="150" width="480" height="35" as="geometry" /></mxCell>
+        <mxCell id="step2" value="2. CartService.AddToCart(productId, qty) ➔ Truy vấn ProductRepository.GetProductById() ➔ Lưu List&lt;CartItemDto&gt; vào Session[&#39;Cart&#39;]" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#fffbeb;strokeColor=#d97706;" vertex="1" parent="1"><mxGeometry x="250" y="205" width="780" height="40" as="geometry" /></mxCell>
+        <mxCell id="step3" value="3. Mở Checkout.aspx ➔ Chọn phương thức thanh toán (COD hoặc BANK_QR)" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#0284c7;" vertex="1" parent="1"><mxGeometry x="80" y="265" width="720" height="35" as="geometry" /></mxCell>
+        <mxCell id="step4" value="4. Đa hình IPaymentMethod: CalculateShippingFee(subTotal) &amp; GenerateQrImageUrl() (VietQR MB Bank nếu chọn BANK_QR)" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#fffbeb;strokeColor=#d97706;" vertex="1" parent="1"><mxGeometry x="440" y="320" width="440" height="45" as="geometry" /></mxCell>
+        <mxCell id="step5" value="5. Nhập Họ tên, SĐT, Địa chỉ ➔ Bấm [ĐẶT HÀNG NGAY] (CheckoutRequestDto)" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#fef2f2;strokeColor=#d70018;fontStyle=1;" vertex="1" parent="1"><mxGeometry x="80" y="385" width="720" height="35" as="geometry" /></mxCell>
+        <mxCell id="step6" value="6. OrderService.PlaceOrder(request, cartItems) ➔ OrderRepository.CreateOrder(order, orderDetails) ➔ Lưu dbo.Orders &amp; dbo.OrderDetails" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#f0fdf4;strokeColor=#16a34a;fontStyle=1;" vertex="1" parent="1"><mxGeometry x="650" y="440" width="450" height="45" as="geometry" /></mxCell>
+        <mxCell id="step7" value="7. CartService.ClearCart() (Xóa Session[&#39;Cart&#39;]) ➔ Hiển thị Hóa đơn thành công #MPS{OrderId} lên giao diện" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#e0f2fe;strokeColor=#0284c7;fontStyle=1;" vertex="1" parent="1"><mxGeometry x="210" y="505" width="620" height="40" as="geometry" /></mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+
+  <!-- TAB 3: ERD DIAGRAM -->
+  <diagram id="erd-b3" name="3. Sơ Đồ CSDL (ERD - Orders &amp; OrderDetails)">
+    <mxGraphModel dx="1422" dy="794" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1169" pageHeight="827" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="t_users" value="dbo.Users&#xa;───────────────────&#xa;PK  UserId (INT IDENTITY)&#xa;    Username (NVARCHAR(50))&#xa;    PasswordHash (VARCHAR(64))&#xa;    Salt (VARCHAR(32))&#xa;    Role (NVARCHAR(20))" style="rounded=1;whiteSpace=wrap;html=1;align=left;spacingLeft=12;fillColor=#e0f2fe;strokeColor=#0284c7;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="80" y="80" width="260" height="140" as="geometry" />
+        </mxCell>
+        <mxCell id="t_orders" value="dbo.Orders [MỚI - PHASE B3]&#xa;───────────────────────────&#xa;PK  OrderId (INT IDENTITY)&#xa;FK  UserId (INT NULL)&#xa;    CustomerName (NVARCHAR(100))&#xa;    Phone (VARCHAR(20))&#xa;    Address (NVARCHAR(255))&#xa;    Note (NVARCHAR(500))&#xa;    PaymentMethod (NVARCHAR(50))&#xa;    ShippingFee (DECIMAL(18,2))&#xa;    TotalAmount (DECIMAL(18,2))&#xa;    Status (NVARCHAR(50))&#xa;    OrderDate (DATETIME)" style="rounded=1;whiteSpace=wrap;html=1;align=left;spacingLeft=12;fillColor=#fef2f2;strokeColor=#d70018;strokeWidth=2;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="440" y="60" width="290" height="240" as="geometry" />
+        </mxCell>
+        <mxCell id="t_orderdetails" value="dbo.OrderDetails [MỚI - PHASE B3]&#xa;───────────────────────────&#xa;PK  OrderDetailId (INT IDENTITY)&#xa;FK  OrderId (INT NOT NULL)&#xa;FK  ProductId (INT NOT NULL)&#xa;    Quantity (INT NOT NULL)&#xa;    UnitPrice (DECIMAL(18,2))" style="rounded=1;whiteSpace=wrap;html=1;align=left;spacingLeft=12;fillColor=#fef2f2;strokeColor=#d70018;strokeWidth=2;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="820" y="100" width="280" height="160" as="geometry" />
+        </mxCell>
+        <mxCell id="t_products" value="dbo.Products&#xa;───────────────────&#xa;PK  ProductId (INT IDENTITY)&#xa;    ProductName (NVARCHAR(200))&#xa;    Price (DECIMAL(18,2))&#xa;    Image (NVARCHAR(255))&#xa;    Description (NVARCHAR(MAX))&#xa;FK  CategoryId (INT)&#xa;FK  BrandId (INT)" style="rounded=1;whiteSpace=wrap;html=1;align=left;spacingLeft=12;fillColor=#f0fdf4;strokeColor=#16a34a;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="820" y="340" width="280" height="170" as="geometry" />
+        </mxCell>
+        <mxCell id="fk1" value="1 ──── 0..N" style="endArrow=ERmany;startArrow=ERone;html=1;strokeWidth=2;strokeColor=#0284c7;" edge="1" parent="1" source="t_users" target="t_orders"><mxGeometry relative="1" as="geometry" /></mxCell>
+        <mxCell id="fk2" value="1 ──── 1..N (CASCADE)" style="endArrow=ERmany;startArrow=ERone;html=1;strokeWidth=2;strokeColor=#d70018;" edge="1" parent="1" source="t_orders" target="t_orderdetails"><mxGeometry relative="1" as="geometry" /></mxCell>
+        <mxCell id="fk3" value="1 ──── 0..N" style="endArrow=ERmany;startArrow=ERone;html=1;strokeWidth=2;strokeColor=#16a34a;" edge="1" parent="1" source="t_products" target="t_orderdetails"><mxGeometry relative="1" as="geometry" /></mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
